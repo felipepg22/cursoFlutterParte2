@@ -10,11 +10,29 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
         home: Scaffold(
+          body: Column(
+            children: <Widget>[
+              Image.asset('images/bytebank_logo.png'),
+              Container(
+                height: 100,
+                width: 100,
+                child: Column(
+                  children: <Widget>[
+                    Icon(Icons.people),
+                    Text('Contatos'),
+                  ],
+                ),
+                color: Colors.green,
+
+              )
+            ]
+          ),
           appBar: AppBar(
             title: Text('Dashboard'),
             backgroundColor: Colors.green[900],
           ),
         )
+            
     );
   }
 }
