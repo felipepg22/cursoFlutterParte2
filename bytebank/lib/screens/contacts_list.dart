@@ -3,9 +3,16 @@ import 'package:bytebank/models/contact.dart';
 import 'package:bytebank/screens/contact_form.dart';
 import 'package:flutter/material.dart';
 
-class ContactsList extends StatelessWidget {
-  final List<Contact> contacts = List();
+class ContactsList extends StatefulWidget {
 
+
+  @override
+  _ContactsListState createState() => _ContactsListState();
+}
+
+class _ContactsListState extends State<ContactsList>{
+
+  final List<Contact> contacts = List();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -13,11 +20,9 @@ class ContactsList extends StatelessWidget {
           title: Text('Contacts'),
         ),
         body: FutureBuilder(
-            future:findAll(),
+            future: findAll(),
             builder: (context, snapshot) {
-
-              switch(snapshot.connectionState){
-
+              switch (snapshot.connectionState) {
                 case ConnectionState.none:
                   break;
                 case ConnectionState.waiting:
@@ -46,20 +51,18 @@ class ContactsList extends StatelessWidget {
               }
 
               return Text("Unknown error");
-
-
-
-
             }),
         floatingActionButton: FloatingActionButton(
           onPressed: () => {
-            Navigator.of(context)
-                .push(MaterialPageRoute(
-                  builder: (context) => ContactForm(),
-                ))
-                .then((newContact) => debugPrint(
-                      newContact.toString(),
-                    ))
+            Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ContactForm(),
+              ),
+            ).then((value) {
+              setState(() {
+                widget.createState();
+              });
+            })
           },
           child: Icon(Icons.add),
         ));
